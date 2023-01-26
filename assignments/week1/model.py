@@ -33,7 +33,7 @@ class LinearRegression:
 
     def fit(self, X: np.ndarray, y: np.ndarray) -> None:
         """
-        Fit the model on the input data using matrix multiplication to find the closed form solution to update the weights.
+        Fit the model on the input data using to find the closed form solution to update the weights.
 
         Arguments:
             X (np.ndarray): The input data.
