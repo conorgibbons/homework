@@ -4,14 +4,14 @@ import numpy as np
 class LinearRegression:
     """
     Linear Regression class for performing linear regression analysis on datasets.
-        
+
     Attributes:
     -----------
     w : array, shape (n_features,) or (n_targets, n_features)
         estimated weights for the linear regression problem.
     b : array
         independent term in the linear model.
-    
+
     Methods:
     --------
     fit(X, y)
@@ -20,10 +20,8 @@ class LinearRegression:
         predict the target values for the given test data.
     """
 
-
     w: np.ndarray
     b: float
-
 
     def __init__(self):
         """
@@ -33,10 +31,9 @@ class LinearRegression:
         self.w = None
         self.b = None
 
-
     def fit(self, X: np.ndarray, y: np.ndarray) -> None:
         """
-        Fit the model on the input data using matrix multiplication to find the closed form solution to update the weights. 
+        Fit the model on the input data using matrix multiplication to find the closed form solution to update the weights.
 
         Arguments:
             X (np.ndarray): The input data.
@@ -56,8 +53,7 @@ class LinearRegression:
         self.b = self.w[0]
         self.w = self.w[1:]
 
-
-    def predict(self, X: np.ndarray ) -> np.ndarray:
+    def predict(self, X: np.ndarray) -> np.ndarray:
         """
         Predict the output for the given input.
 
@@ -71,7 +67,7 @@ class LinearRegression:
 
         # Add bias term to X
         X = np.c_[np.ones(X.shape[0]), X]
-        
+
         # Make predictions using the learned coefficients
         return X.dot(np.r_[self.b, self.w])
 
@@ -79,14 +75,14 @@ class LinearRegression:
 class GradientDescentLinearRegression(LinearRegression):
     """
     Linear Regression class that uses gradient descent optimization algorithm to minimize the cost function.
-        
+
     Attributes:
     -----------
     w : array, shape (n_features,) or (n_targets, n_features)
         estimated weights for the linear regression problem.
     b : array
         independent term in the linear model.
-    
+
     Methods:
     --------
     fit(X, y)
@@ -95,12 +91,11 @@ class GradientDescentLinearRegression(LinearRegression):
         predict the target values for the given test data.
     """
 
-
     def fit(
         self, X: np.ndarray, y: np.ndarray, lr: float = 0.01, epochs: int = 1000
     ) -> None:
         """
-        Fit the model on the input data using gradient descent to update the weights. 
+        Fit the model on the input data using gradient descent to update the weights.
 
         Arguments:
             X (np.ndarray): The input data.
@@ -111,10 +106,10 @@ class GradientDescentLinearRegression(LinearRegression):
         Returns:
             None
         """
-        
+
         # Add bias term to X
         X = np.c_[np.ones(X.shape[0]), X]
-        
+
         # Initialize coefficients randomly
         self.w = np.random.randn(X.shape[1])
         self.b = np.random.randn()
@@ -125,7 +120,6 @@ class GradientDescentLinearRegression(LinearRegression):
             errors = y - y_pred
             self.w += lr * X.T.dot(errors)
             self.b += lr * errors.sum()
-
 
     def predict(self, X: np.ndarray) -> np.ndarray:
         """
@@ -141,7 +135,6 @@ class GradientDescentLinearRegression(LinearRegression):
 
         # Add bias term to X
         X = np.c_[np.ones(X.shape[0]), X]
-        
+
         # Make predictions using the learned coefficients
         return X.dot(self.w) + self.b
-        
