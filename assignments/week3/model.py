@@ -26,7 +26,7 @@ class MLP(torch.nn.Module):
             num_classes: The number of classes C.
             activation: The activation function to use in the hidden layer.
             initializer: The initializer to use for the weights.
-        """ 
+        """
 
         super(MLP, self).__init__()
 
@@ -35,15 +35,13 @@ class MLP(torch.nn.Module):
         # Initialize layers of MLP
         self.layers = nn.ModuleList()
 
-
         # Loop over layers and create each one
         for i in range(hidden_count):
+            next_num_inputs = hidden_size
 
-          next_num_inputs = hidden_size
+            self.layers += [nn.Linear(input_size, next_num_inputs)]
 
-          self.layers += [nn.Linear(input_size, next_num_inputs)]
-
-          input_size = next_num_inputs
+            input_size = next_num_inputs
 
         # Create final layer
         self.out = nn.Linear(input_size, num_classes)
@@ -62,18 +60,9 @@ class MLP(torch.nn.Module):
 
         # Get activations of each layer
         for layer in self.layers:
-          x = self.actv(layer(x))
+            x = self.actv(layer(x))
 
         # Get outputs
-        x = self.out(x) 
+        x = self.out(x)
 
         return x
-
-
-
-
-
-
-
-
-
