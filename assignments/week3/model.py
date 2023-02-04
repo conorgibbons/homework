@@ -19,7 +19,6 @@ class MLP(torch.nn.Module):
     ) -> None:
         """
         Initialize the MLP.
-
         Arguments:
             input_size: The dimension D of the input data.
             hidden_size: The number of neurons H in the hidden layer.
@@ -37,7 +36,7 @@ class MLP(torch.nn.Module):
 
         # Loop over layers and create each one
         for i in range(hidden_count):
-            next_num_inputs = hidden_count
+            next_num_inputs = hidden_size
 
             self.layers += [nn.Linear(input_size, next_num_inputs)]
 
@@ -49,10 +48,8 @@ class MLP(torch.nn.Module):
     def forward(self, x: torch.Tensor) -> torch.Tensor:
         """
         Forward pass of the network.
-
         Arguments:
             x: The input data.
-
         Returns:
             The output of the network.
         """
