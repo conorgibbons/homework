@@ -37,7 +37,6 @@ class MLP(torch.nn.Module):
 
         # Loop over layers and create each one
         for i in range(hidden_count):
-
             next_num_inputs = hidden_count
 
             self.layers += [nn.Linear(input_size, next_num_inputs)]
