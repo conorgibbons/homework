@@ -133,7 +133,6 @@ def train(
         progress_bar.set_description(f"Epoch: {epoch}, Accuracy: {accuracy:.4f}")
 
 
-
 def main():
     # Get the data:
     train_loader, test_loader = get_mnist_data()
