@@ -4,6 +4,10 @@ from torch.optim.lr_scheduler import _LRScheduler
 
 
 class CustomLRScheduler(_LRScheduler):
+    """
+    Testing.....
+    """
+
     def __init__(self, optimizer, step_size, gamma=0.1, last_epoch=-1):
         """
         Create a new scheduler.
@@ -19,6 +23,9 @@ class CustomLRScheduler(_LRScheduler):
         super(CustomLRScheduler, self).__init__(optimizer, last_epoch)
 
     def get_lr(self) -> List[float]:
+        """
+        Testing.....
+        """
         # Note to students: You CANNOT change the arguments or return type of
         # this function (because it is called internally by Torch)
 
@@ -35,6 +42,9 @@ class CustomLRScheduler(_LRScheduler):
         return [group["lr"] * self.gamma for group in self.optimizer.param_groups]
 
     def _get_closed_form_lr(self):
+        """
+        Testing.....
+        """
         return [
             base_lr * self.gamma ** (self.last_epoch // self.step_size)
             for base_lr in self.base_lrs
