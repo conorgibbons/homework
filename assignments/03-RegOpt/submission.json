@@ -1,7 +1,12 @@
 {
     "assignment_name": "RegOpt",
-    "contributors": [{"name": "Conor Gibbons", "pennkey": "cjg191"}],
+    "contributors": [
+        {
+            "name": "Conor Gibbons",
+            "pennkey": "cjg191"
+        }
+    ],
     "sources": [
         "https://pytorch.org/docs/stable/_modules/torch/optim/lr_scheduler.html"
-    ],
+    ]
 }
