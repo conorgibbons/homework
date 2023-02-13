@@ -8,7 +8,7 @@ class CustomLRScheduler(_LRScheduler):
     Testing.....
     """
 
-    def __init__(self, optimizer, step_size, gamma=0.1, last_epoch=-1):
+    def __init__(self, optimizer, last_epoch=-1, **kwargs):
         """
         Create a new scheduler.
 
