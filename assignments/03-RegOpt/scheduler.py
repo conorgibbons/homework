@@ -18,8 +18,8 @@ class CustomLRScheduler(_LRScheduler):
         """
         # ... Your Code Here ...
 
-        self.step_size = step_size
-        self.gamma = gamma
+        self.step_size = kwargs["step_size"]
+        self.gamma = kwargs["gamma"]
         super(CustomLRScheduler, self).__init__(optimizer, last_epoch)
 
     def get_lr(self) -> List[float]:
