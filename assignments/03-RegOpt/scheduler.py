@@ -2,6 +2,8 @@ from typing import List
 
 from torch.optim.lr_scheduler import _LRScheduler
 
+import math
+
 
 class CustomLRScheduler(_LRScheduler):
     """
@@ -18,11 +20,14 @@ class CustomLRScheduler(_LRScheduler):
         """
         # ... Your Code Here ...
 
-        self.T_max = T_max
-        self.eta_min = eta_min
+        self.T_max = kwargs["T_max"]
+        self.eta_min = kwargs["eta_min"]
         super(CustomLRScheduler, self).__init__(optimizer, last_epoch)
 
-    def get_lr(self):
+    def get_lr(self) -> List[float]:
+        """
+        Test...
+        """
         if self.last_epoch == 0:
             return [group["lr"] for group in self.optimizer.param_groups]
         elif self._step_count == 1 and self.last_epoch > 0:
@@ -48,6 +53,9 @@ class CustomLRScheduler(_LRScheduler):
         ]
 
     def _get_closed_form_lr(self):
+        """
+        Test
+        """
         return [
             self.eta_min
             + (base_lr - self.eta_min)
