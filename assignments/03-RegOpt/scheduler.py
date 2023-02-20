@@ -7,7 +7,19 @@ import math
 
 class CustomLRScheduler(_LRScheduler):
     """
-    Testing.....
+    Decays the learning rate of each parameter group by gamma every
+    step_size epochs. Notice that such decay can happen simultaneously with
+    other changes to the learning rate from outside this scheduler. When
+    last_epoch=-1, sets initial lr as lr.
+
+    Args:
+        optimizer (Optimizer): Wrapped optimizer.
+        step_size (int): Period of learning rate decay.
+        gamma (float): Multiplicative factor of learning rate decay.
+            Default: 0.1.
+        last_epoch (int): The index of last epoch. Default: -1.
+        verbose (bool): If ``True``, prints a message to stdout for
+            each update. Default: ``False``.
     """
 
     def __init__(self, optimizer, last_epoch=-1, **kwargs):
