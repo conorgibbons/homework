@@ -24,40 +24,38 @@ class CustomLRScheduler(_LRScheduler):
 
         super(CustomLRScheduler, self).__init__(optimizer, last_epoch)
 
+    def get_lr(self) -> List[float]:
+        """
+        Returns a list of learning rates for each parameter group in the optimizer. If the current epoch is
+        zero or not a multiple of the step size, returns the current learning rate for each group. Otherwise,
+        multiplies the current learning rate for each group by the gamma value.
 
-def get_lr(self) -> List[float]:
-    """
-    Returns a list of learning rates for each parameter group in the optimizer. If the current epoch is
-    zero or not a multiple of the step size, returns the current learning rate for each group. Otherwise,
-    multiplies the current learning rate for each group by the gamma value.
+        Returns:
+        --------
+        lrs : list of floats
+            The learning rate for each parameter group in the optimizer.
+        """
+        lrs = []
+        for group in self.optimizer.param_groups:
+            if (self.last_epoch == 0) or (self.last_epoch % self.step_size != 0):
+                lrs.append(group["lr"])
+            else:
+                lrs.append(group["lr"] * self.gamma)
+        return lrs
 
-    Returns:
-    --------
-    lrs : list of floats
-        The learning rate for each parameter group in the optimizer.
-    """
-    lrs = []
-    for group in self.optimizer.param_groups:
-        if (self.last_epoch == 0) or (self.last_epoch % self.step_size != 0):
-            lrs.append(group["lr"])
-        else:
-            lrs.append(group["lr"] * self.gamma)
-    return lrs
+    def _get_closed_form_lr(self):
+        """
+        Returns a list of learning rates for each parameter group in the optimizer, calculated using a closed-form
+        formula. The learning rate for each group is calculated by multiplying the base learning rate for the group
+        by the gamma value raised to the power of the current epoch divided by the step size.
 
-
-def _get_closed_form_lr(self):
-    """
-    Returns a list of learning rates for each parameter group in the optimizer, calculated using a closed-form
-    formula. The learning rate for each group is calculated by multiplying the base learning rate for the group
-    by the gamma value raised to the power of the current epoch divided by the step size.
-
-    Returns:
-    --------
-    lrs : list of floats
-        The learning rate for each parameter group in the optimizer.
-    """
-    lrs = []
-    for base_lr in self.base_lrs:
-        lr = base_lr * self.gamma ** (self.last_epoch // self.step_size)
-        lrs.append(lr)
-    return lrs
+        Returns:
+        --------
+        lrs : list of floats
+            The learning rate for each parameter group in the optimizer.
+        """
+        lrs = []
+        for base_lr in self.base_lrs:
+            lr = base_lr * self.gamma ** (self.last_epoch // self.step_size)
+            lrs.append(lr)
+        return lrs
