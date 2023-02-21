@@ -9,6 +9,6 @@
     "sources": [
         "https://pytorch.org/docs/stable/_modules/torch/optim/lr_scheduler.html",
         "https://chat.openai.com/chat",
-        "https://github.com/kuangliu/pytorch-cifar/issues/19",
+        "https://github.com/kuangliu/pytorch-cifar/issues/19"
     ]
 }
