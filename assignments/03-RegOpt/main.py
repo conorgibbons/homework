@@ -91,18 +91,19 @@ def train(
             y_hat = model(x)
             # Compute the loss:
             loss = criterion(y_hat, y)
+            print(loss.item())
             # Backward pass:
             loss.backward()
             # Update the parameters:
             optimizer.step()
             # Update the learning rate:
-            learning_rate_scheduler.step()
+            #learning_rate_scheduler.step()
         # Set the model to evaluation mode:
         model.eval()
         # Compute the accuracy on the test data:
         accuracy = compute_accuracy(model, test_loader, device)
         # Print the results:
-        print(f"Epoch {epoch + 1} | Test Accuracy: {accuracy:.2f}")
+        print(f"Epoch {epoch + 1} | Test Accuracy: {accuracy:.2f}") 
 
 
 def compute_accuracy(

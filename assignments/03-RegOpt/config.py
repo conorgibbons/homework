@@ -2,13 +2,13 @@ from typing import Callable
 import torch
 import torch.optim
 import torch.nn as nn
-from torchvision.transforms import Compose, Normalize, ToTensor
+from torchvision.transforms import Compose, Normalize, ToTensor, RandomHorizontalFlip, RandomVerticalFlip
 
 
 class CONFIG:
-    batch_size = 64
-    num_epochs = 5
-    initial_learning_rate = 0.0025
+    batch_size = 1024
+    num_epochs = 20
+    initial_learning_rate = 0.01
     initial_weight_decay = 0
 
     lrs_kwargs = {
@@ -28,6 +28,8 @@ class CONFIG:
 
     transforms = Compose(
         [
+            RandomHorizontalFlip(0.5),
             ToTensor(),
+            Normalize(0.5,0.5)
         ]
     )
