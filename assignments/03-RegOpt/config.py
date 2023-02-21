@@ -30,7 +30,6 @@ class CONFIG:
     transforms = Compose(
         [
             ToTensor(),
-            RandomHorizontalFlip(0.4),
             Normalize([0.5, 0.5, 0.5], [0.5, 0.5, 0.5]),
         ]
     )
