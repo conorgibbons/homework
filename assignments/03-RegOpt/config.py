@@ -7,7 +7,7 @@ from torchvision.transforms import Compose, Normalize, ToTensor, RandomHorizonta
 
 class CONFIG:
     batch_size = 24
-    num_epochs = 20
+    num_epochs = 12
     initial_learning_rate = 0.0015
     initial_weight_decay = 0
 
