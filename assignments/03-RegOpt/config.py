@@ -6,16 +6,18 @@ from torchvision.transforms import Compose, Normalize, ToTensor, RandomHorizonta
 
 
 class CONFIG:
-    batch_size = 32
-    num_epochs = 8
+    batch_size = 64#32
+    num_epochs = 9
     initial_learning_rate = 0.002
     initial_weight_decay = 0
 
     lrs_kwargs = {
         # You can pass arguments to the learning rate scheduler
         # constructor here.
-        "gamma": 0.99,
-        "step_size": 420,
+        "min_lr": 0.002,
+        "max_lr": 0.01,
+        "step_size": 512,#1024,
+        "iteration": 0,
     }
 
     optimizer_factory: Callable[
