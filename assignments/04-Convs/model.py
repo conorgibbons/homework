@@ -43,8 +43,7 @@ class Model(torch.nn.Module):
         self.batch_norm = nn.BatchNorm2d(6)
 
         self.flatten = nn.Flatten()
-        self.lin1 = nn.Linear(600, 32)
-        self.lin2 = nn.Linear(32, num_classes)
+        self.lin1 = nn.Linear(600, num_classes)
 
     def forward(self, x: torch.Tensor) -> torch.Tensor:
         """
@@ -65,7 +64,5 @@ class Model(torch.nn.Module):
         x = self.flatten(x)
 
         x = self.lin1(x)
-        x = torch.relu(x)
-        x = self.lin2(x)
 
         return x
