@@ -37,13 +37,13 @@ class Model(torch.nn.Module):
         """
         super(Model, self).__init__()
 
-        self.conv1 = nn.Conv2d(3, 6, kernel_size=4, padding=1)
+        self.conv1 = nn.Conv2d(3, 3, kernel_size=4, padding=1)
 
         self.pool = nn.MaxPool2d(3, 3)
-        self.batch_norm = nn.BatchNorm2d(6)
+        self.batch_norm = nn.BatchNorm2d(3)
 
         self.flatten = nn.Flatten()
-        self.lin1 = nn.Linear(600, num_classes)
+        self.lin1 = nn.Linear(300, num_classes)
 
     def forward(self, x: torch.Tensor) -> torch.Tensor:
         """
