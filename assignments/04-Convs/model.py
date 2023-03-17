@@ -37,12 +37,10 @@ class Model(torch.nn.Module):
         """
         super(Model, self).__init__()
 
-        self.conv1 = torch.nn.Conv2d(num_channels, 16, kernel_size=8, padding=1)
-        self.conv2 = torch.nn.Conv2d(16, 8, kernel_size=5, padding=1)
-        self.pool = torch.nn.MaxPool2d(2, 2)
-        self.flatten = torch.nn.Flatten()
-        self.fc1 = torch.nn.Linear(200, 32)
-        self.fc2 = torch.nn.Linear(32, num_classes)
+        self.conv1 = nn.Conv2d(3, 12, kernel_size=3, padding=1)
+
+        self.flatten = nn.Flatten()
+        self.lin1 = nn.Linear(12288, num_classes)
 
     def forward(self, x: torch.Tensor) -> torch.Tensor:
         """
@@ -55,20 +53,11 @@ class Model(torch.nn.Module):
             torch.Tensor: The output tensor of shape (batch_size, num_classes).
 
         """
-
         x = self.conv1(x)
         x = torch.relu(x)
-        x = self.pool(x)
-
-        x = self.conv2(x)
-        x = torch.relu(x)
-        x = self.pool(x)
 
         x = self.flatten(x)
 
-        x = self.fc1(x)
-        x = torch.relu(x)
-
-        x = self.fc2(x)
+        x = self.lin1(x)
 
         return x
